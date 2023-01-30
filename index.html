@@ -2,11 +2,39 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link
+      rel="shortcut icon"
+      href="./public/images/weather-favicon.ico"
+      type="image/x-icon"
+    />
+    <link rel="apple-touch-icon" href="./public/images/weather-favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <meta name="theme-color" content="#112930" />
+    <meta
+      name="description"
+      content="PWA web application for predicate weather of all cites"
+    />
+    <link rel="manifest" href="./public/manifest.json" />
+    <title>Weather App</title>
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("./public/serviceworker.js")
+            .then((reg) => {
+              //first "then" is for success register
+              console.log("Seuccess: ", reg.scope);
+            })
+            .catch((err) => {
+              //second "then" is for fail register
+              console.log("Error: ", err);
+            });
+        });
+      }
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
